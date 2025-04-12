@@ -3,45 +3,64 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public float moveSpeed;
+    private Rigidbody2D rb;
+    private Animator animator;
+    private SpriteRenderer sr;
+    public float jumpForce;
+    private bool isGrounded;
+    private bool canDoubleJump;
+    public Transform circleLocation;
+    public LayerMask groundLayer;
 
-    public Animator animator;
-    public float Speed;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
-
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
-        PlayMovementAnim(horizontalInput);
-        MoveCharacter(horizontalInput);
-    }
+        rb.linearVelocity = new Vector2(moveSpeed * Input.GetAxisRaw("Horizontal"), rb.linearVelocity.y);
+        isGrounded = Physics2D.OverlapCircle(circleLocation.position, 0.2f, groundLayer);
 
-    private void MoveCharacter(float horizontalInput)
-    {
-        Vector3 position = transform.position;
-        position.x += horizontalInput * Speed * Time.deltaTime;
-        transform.position = position;
-    }
 
-    private void PlayMovementAnim(float horizontalInput)
-    {
-        animator.SetFloat("Speed", Mathf.Abs(horizontalInput));
-
-        Vector3 scale = transform.localScale;
-        if (horizontalInput < 0)
+        if (isGrounded)
         {
-            scale.x = -1f * Mathf.Abs(scale.x);
-        }
-        else if (horizontalInput > 0)
-        {
-            scale.x = Mathf.Abs(scale.x);
+            canDoubleJump = true;
         }
 
-        transform.localScale = scale;
+        if (Input.GetButtonDown("Jump"))
+        {
+            if (isGrounded)
+            {
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            }
+            else
+            {
+                if (canDoubleJump)
+                {
+                    rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+                    canDoubleJump = false;
+                }
+            }
+        }
+
+
+        if (rb.linearVelocity.x < 0)
+        {
+            sr.flipX = true;
+        }
+        else if (rb.linearVelocity.x > 0)
+        {
+            sr.flipX = false;
+        }
+
+        animator.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
+        animator.SetBool("Jump", !isGrounded);
+        Debug.Log("jump is now " + isGrounded);
+
     }
 }
