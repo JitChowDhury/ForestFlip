@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed;
     private Rigidbody2D rb;
     private Animator animator;
-    private SpriteRenderer sr;
+
     public float jumpForce;
     private bool isGrounded;
     private bool canDoubleJump;
@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        sr = GetComponent<SpriteRenderer>();
+
     }
 
     void Update()
@@ -48,19 +48,26 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-
+        Vector2 scale = transform.localScale;
         if (rb.linearVelocity.x < 0)
         {
-            sr.flipX = true;
+            scale.x = -1f * Mathf.Abs(scale.x);
         }
         else if (rb.linearVelocity.x > 0)
         {
-            sr.flipX = false;
+            scale.x = Mathf.Abs(scale.x);
         }
+        transform.localScale = scale;
 
         animator.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
         animator.SetBool("Jump", !isGrounded);
         Debug.Log("jump is now " + isGrounded);
 
+    }
+
+
+    public void PickUpCoin()
+    {
+        Debug.Log("player picked up the coin");
     }
 }
