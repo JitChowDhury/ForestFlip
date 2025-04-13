@@ -1,0 +1,30 @@
+using System.Collections;
+using UnityEngine;
+
+public class EnemySpawner : MonoBehaviour
+{
+    public GameObject enemyPrefab;
+    public Transform player;
+    public float spawnInterval = 2f;
+    public float spawnDistance = 30f;
+    public float spawnRangeX = 10f;
+
+    void Start()
+    {
+        InvokeRepeating("SpawnEnemy", 1f, spawnInterval);
+    }
+
+    void SpawnEnemy()
+    {
+        // Random X offset near the player
+        float randomX = Random.Range(-spawnRangeX, spawnRangeX);
+
+        // Calculate spawn position in front of the player
+        Vector3 spawnPos = new Vector3(player.position.x + spawnDistance, player.position.y, randomX);
+
+        // Instantiate the enemy
+
+        if (Random.value <= 0.2f)
+            Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+    }
+}
