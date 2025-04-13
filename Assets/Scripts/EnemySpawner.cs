@@ -17,10 +17,10 @@ public class EnemySpawner : MonoBehaviour
     void SpawnEnemy()
     {
         // Random X offset near the player
-        float randomX = Random.Range(-spawnRangeX, spawnRangeX);
+        //float randomX = Random.Range(-spawnRangeX, spawnRangeX);
 
         // Calculate spawn position in front of the player
-        Vector3 spawnPos = new Vector3(player.position.x + spawnDistance, player.position.y, randomX);
+        Vector3 spawnPos = new Vector3(player.position.x + spawnDistance, player.position.y, 0f);
 
         // Instantiate the enemy
 
