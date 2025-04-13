@@ -23,7 +23,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        rb.linearVelocity = new Vector2(moveSpeed * Input.GetAxisRaw("Horizontal"), rb.linearVelocity.y);
+        //rb.linearVelocity = new Vector2(moveSpeed * Input.GetAxisRaw("Horizontal"), rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(moveSpeed, rb.linearVelocity.y);
         isGrounded = Physics2D.OverlapCircle(circleLocation.position, 0.2f, groundLayer);
 
 
