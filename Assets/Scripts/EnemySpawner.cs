@@ -20,7 +20,7 @@ public class EnemySpawner : MonoBehaviour
         //float randomX = Random.Range(-spawnRangeX, spawnRangeX);
 
         // Calculate spawn position in front of the player
-        Vector3 spawnPos = new Vector3(player.position.x + spawnDistance, player.position.y, 0f);
+        Vector3 spawnPos = new Vector3(player.position.x + spawnDistance, -0.2f, 0f);
 
         // Instantiate the enemy
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
@@ -40,6 +41,8 @@ public class ChunkPooler : MonoBehaviour
         float distanceToPlayer = player.position.x - firstChunk.transform.position.x;
 
 
+
+
         if (distanceToPlayer > chunkWidth + chunkWidth / 2)
         {
             GameObject recycledChunk = chunkPool.Dequeue();
@@ -48,6 +51,8 @@ public class ChunkPooler : MonoBehaviour
 
             chunkPool.Enqueue(recycledChunk);
         }
+
+
     }
 
 }
