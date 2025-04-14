@@ -21,6 +21,14 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         transform.position = Vector2.MoveTowards(transform.position, new Vector3(0, -0.2f), speed * Time.deltaTime);
+
+
+
+        if (playerTransform.position.x > this.transform.position.x + 15f)
+        {
+            Destroy(this.gameObject);
+        }
+
     }
 
     void OnTriggerEnter2D(Collider2D collision)

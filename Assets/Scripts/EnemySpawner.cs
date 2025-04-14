@@ -24,7 +24,7 @@ public class EnemySpawner : MonoBehaviour
 
         // Instantiate the enemy
 
-        if (Random.value <= 0.2f)
+        if (Random.value <= 0.3f)
             Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
     }
 }
