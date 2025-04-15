@@ -22,12 +22,5 @@ public class Coin : MonoBehaviour
 
     }
 
-    void Update()
-    {
-        if (playerTransform.position.x > this.transform.position.x + 15f)
-        {
-            Destroy(this.gameObject);
-        }
-    }
 }
 

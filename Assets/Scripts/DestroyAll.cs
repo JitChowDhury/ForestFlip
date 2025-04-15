@@ -12,11 +12,14 @@ public class DestroyAll : MonoBehaviour
     void Update()
     {
         Vector3 pos = this.transform.position;
-        pos = new Vector3(playerTransform.position.x, transform.position.y, transform.position.z);
+        pos = new Vector3(playerTransform.position.x - 20f, playerTransform.position.y, transform.position.z);
         this.transform.position = pos;
     }
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        Destroy(collision.gameObject);
+        Destroy(other.gameObject);
     }
+
+
+
 }
