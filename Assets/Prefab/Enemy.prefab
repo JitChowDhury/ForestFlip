@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clip: {fileID: 7400000, guid: 5d15a280bdef08b40b78869c2403c104, type: 2}
-  speed: 5
+  moveSpeed: 5
 --- !u!70 &7232826787976543658
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

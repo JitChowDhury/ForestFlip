@@ -71,4 +71,9 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("player picked up the coin");
     }
+
+    public void EnemyTrigger()
+    {
+        Debug.Log("Collided with Enemy");
+    }
 }

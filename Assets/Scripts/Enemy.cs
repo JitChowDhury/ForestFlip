@@ -2,17 +2,21 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private Transform playerTransform;
+    private GameObject player;
+    private Transform playerTransform;//transform for player
+    private PlayerController playerController;
     private Rigidbody2D rb;
     private Animator animator;
     public AnimationClip clip;
 
-    public float speed = 5f;
+    public float moveSpeed = 5f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
-        playerTransform = GameObject.Find("Player").GetComponent<Transform>();
+        player = GameObject.Find("Player");
+        playerTransform = player.GetComponent<Transform>();
+        playerController = player.GetComponent<PlayerController>();
         animator = GetComponent<Animator>();
     }
 
@@ -20,7 +24,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, new Vector3(0, -0.2f), speed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, new Vector3(0, -0.2f), moveSpeed * Time.deltaTime);
 
 
 
@@ -37,8 +41,10 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             animator.SetTrigger("Death");
+            playerController.EnemyTrigger();
             //durationInSeconds = numberOfFrames / frameRate
             Destroy(this.gameObject, 0.2f);
+
         }
     }
 
